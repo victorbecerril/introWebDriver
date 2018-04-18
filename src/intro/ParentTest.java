@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class ParentTest {
 	static WebDriver driver;
@@ -14,9 +15,12 @@ public class ParentTest {
 
 	public static void setUp() {
 		//System.setProperty("webdriver.chrome.driver", "C:\\automation\\drivers\\chromedriver.exe");  //propiedad explorador chrome		
-		driver = new ChromeDriver();  //driver de chrome
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-notifications");
+		
+		driver = new ChromeDriver(options);  //driver de chrome
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.navigate().to("http:\\imdb.com");//navegar a la pagina de IMDB.com
+		driver.navigate().to("https://www.facebook.com/");//navegar a la pagina de IMDB.com (edited fb)
 	}
 
 	public static void clickElement(By elementLocator) {

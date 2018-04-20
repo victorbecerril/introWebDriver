@@ -15,6 +15,8 @@ public class ImdbChrome {
 	static String movieName = "It";
 	static String movieYear = "2017";
 	private static String movieDirector = "Andy Muschietti";
+	private static String movieWriter1 = "Chase Palmer";
+	private static String movieWriter2 = "Cary Joji Fukunaga";
 	
 	public static void main(String[] args) {
 		openImdb();
@@ -24,9 +26,28 @@ public class ImdbChrome {
 		//clickMovieLink(movieName);
 		validateMovieYear(movieYear);
 		validateMovieDirector(movieDirector);
+		validateWriter(movieWriter1);
+		validateWriter(movieWriter2);
 		closeBrowser();
 	}
 	
+	private static void validateWriter(String movieWriter) {
+		WebElement correctContainer = null;
+		List<WebElement> containerList = driver.findElements(By.className("credit_summary_item"));
+		for(WebElement currentContainer : containerList) {
+			if(currentContainer.getText().contains("Writers")) {
+				correctContainer = currentContainer;
+				break;
+			}
+		}
+		String writerText = correctContainer.getText();
+		if(writerText.contains(movieWriter)) {
+			System.out.println("Sí contiene el texto: " + movieWriter);
+		}else {
+			System.exit(-1);
+		}
+	}
+
 	private static void clickMovieLink(String movieName2, String movieYear2) {
 		WebElement correctMovie = null;
 		List<WebElement> movieLists = driver.findElements(By.className("result_text"));

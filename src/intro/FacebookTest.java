@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class FacebookTest extends ParentTest{
@@ -68,7 +70,11 @@ public class FacebookTest extends ParentTest{
 		emailField.sendKeys(emailInput);
 		passwordField.clear();
 		passwordField.sendKeys(passwordInput);
-		logInButton.click();		
+		logInButton.click();
+		
+		WebDriverWait wait = new WebDriverWait(driver,10);
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("q")));
 	}
 
 }

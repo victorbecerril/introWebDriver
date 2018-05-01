@@ -9,7 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class YahooSearchMain {
 	
@@ -19,7 +22,7 @@ public class YahooSearchMain {
 		//INICIALIZACION DE SYSTEM.SETPROPERTY()
 	    WebDriver driver;
 	    //Open browser
-		driver = new InternetExplorerDriver();
+		driver = new ChromeDriver();
 		//Sets 30 sec of waiting for the session
 		driver.manage().timeouts().implicitlyWait(30,  TimeUnit.SECONDS);
 		//Browse to specified web site
@@ -51,6 +54,11 @@ public class YahooSearchMain {
 		WebElement downloadLink = driver.findElement(By.linkText("Download"));
 		//Click the "Download" link
 		downloadLink.click();
+		
+		WebDriverWait wait = new WebDriverWait(driver, 18);
+		
+		wait.until(ExpectedConditions.invisibilityOfAllElements(findElement(By.class)));
+		
 		//Close all windows from current session
 		driver.quit();
 
